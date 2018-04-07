@@ -1,0 +1,310 @@
+<!--
+
+
+Description:
+This is a landing page with options to sign in, sign up, logout and  search for a property. 
+
+Authors:
+Swetaketu Majumder,Akhila, Mahdis-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <title>BiiG</title>
+        <!--<link rel="import" href="_linkToStylesheets.html"> -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Material Design Bootstrap -->
+        <link href="/css/mdb.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/mdb.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+    <div id="header"></div>
+
+        <div  id="intro" class="view">
+            <div class="container-fluid full-bg-img d-flex align-items-center justify-content-center">
+                <div id="searchdiv" class="row d-flex justify-content-center view hm-black-strong" style="width:90%; height:50%; top:10%">
+                    <div class="col-md-12 text-align-center jumbotron" style="background: rgba(250, 253, 255, 0.808)">
+                        <h2 style="text-align: center">FIND YOUR DREAM PROPERTY WITH BiiG</h2>
+                        <br>
+                        <form id="searchform" method="GET" action="https://evening-waters-97508.herokuapp.com/searchfinder">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <input id="key" type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Enter Address or City or Postalcode" name="key">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                                                    Advanced
+                                                </button>
+                                                <button id="dosearch" type="button" class="btn btn-primary">
+                                                    SEARCH
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="row"  style="margin-top: 1%">
+                                                <div class="card p-2" style="width:150px">
+                                                    <div class="card-block">
+                                                        <!--Title-->
+                                                        <p class="card-title">No. of Rooms</p>
+                                                        <!--Text-->
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" name="numberOfRooms" value="1"> 1</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" name="numberOfRooms" value="2"> 2</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" name="numberOfRooms" value="3"> 3</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" name="numberOfRooms" value=">= 4"> >= 4
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card p-2" style="width:150px">
+                                                    <div class="card-block">
+                                                        <p class="card-title">Furnishing State</p>
+                                                        <!--<% if(locals.furnishingStates){
+                                                        for(var i = 0;i < furnishingStates.length;i++) { %>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" name="furnishingState" value="<%=furnishingStates[i].id%>"><%=furnishingStates[i].value%>
+                                                        </div>
+                                                        <% }
+                                                        }else{ %>-->
+                                                        <div>
+                                                            No furnishingState
+                                                        </div>
+                                                        <!--<% } %>-->
+                                                    </div>
+                                                </div>
+                                                <div class="card p-2" style="width:150px">
+                                                    <div class="card-block">
+                                                        <p class="card-title">Size</p>
+                                                        <!--<% if(locals.sizes){
+                                                        for(var i = 0;i < sizes.length;i++) { %>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" name="size" value="<%=sizes[i].value%>"><%=sizes[i].value%>
+                                                        </div>
+                                                        <% }
+                                                        }else{ %>-->
+                                                        <div>
+                                                            No size
+                                                        </div>
+                                                        <!--<% } %>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                    <hr class="hr-dark">
+                </div>
+                <div id = "resultsdiv"></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="mt-5">
+        <div class="container">
+            <!--Section: Best Features-->
+            <section id="best-features" class="text-center">
+
+                <!-- Heading -->
+                <h2 class="mb-4 font-weight-bold">Our Features</h2>
+
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center mb-4">
+
+                    <!--Grid column-->
+                    <div class="col-md-8">
+
+                        <!-- Description -->
+                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
+                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
+                            sit pariatur.</p>
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-4 mb-5">
+                        <i class="fa fa-camera-retro fa-4x orange-text"></i>
+                        <h4 class="my-4 font-weight-bold">Experience</h4>
+                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
+                            assumenda deleniti hic.</p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-4 mb-1">
+                        <i class="fa fa-heart fa-4x orange-text"></i>
+                        <h4 class="my-4 font-weight-bold">Happiness</h4>
+                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
+                            assumenda deleniti hic.</p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-4 mb-1">
+                        <i class="fa fa-bicycle fa-4x orange-text"></i>
+                        <h4 class="my-4 font-weight-bold">Adventure</h4>
+                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
+                            assumenda deleniti hic.</p>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Best Features-->
+
+            <hr class="my-5">
+
+            <!--Section: Examples-->
+            <section id="examples">
+
+
+
+            </section>
+            <!--Section: Examples-->
+
+            <hr class="my-5">
+
+            <!--Section: Gallery-->
+            <section id="gallery">
+
+
+
+            </section>
+            <!--Section: Gallery-->
+
+            <hr class="my-5">
+
+            <!--Section: Contact-->
+            <section id="contact">
+
+
+
+            </section>
+            <!--Section: Contact-->
+
+        </div>
+    </main>
+    <!--/.Mask-->
+
+        <link rel="import" href="_linkToScripts.html">
+    <script>
+        $(function(){
+            $("#header").load("_header.html");
+        });
+
+
+
+        $('#dosearch').click(function(){
+            var request = new XMLHttpRequest();
+            alert($('#searchform').attr('action')+"?key="+$('#key').val());
+            request.open("GET",  $('#searchform').attr('action')+"?key="+$('#key').val(), true);
+            request.onreadystatechange = function() {
+                //alert("Yaay");
+                if (request.readyState == 4) {
+                    if (request.status == 200 || request.status == 0) {
+                        var jsonData = JSON.parse(request.response)["properties"];
+                        var html = "";
+                        for (ind in jsonData) {
+                            html += "<div class='card p-3 m-2'>" +
+                                "<div class='row card-block'>" +
+                                "<div class='propertySummary col-sm-8 col-md-8'><h3 class='card-title'>" + jsonData[ind].title + "</h3></a></div></div>" +
+                                "<h5 class='card-title'>" + jsonData[ind].price + " " + jsonData[ind].size + " m² " + jsonData[ind].numberofrooms + " rooms " + " </h5>" +
+                                "<div class='card-text'>" + jsonData[ind].plz + "," + jsonData[ind].city + "," + jsonData[ind].state + "," + jsonData[ind].country + "</div>" +
+                                "<div class='propertyImage col-sm-4 col-md-4'><img src='https://evening-waters-97508.herokuapp.com/"+ jsonData[ind].image1+"' class='img-thumbnail' alt='Property Image'></div></div>";
+
+                        }
+                        $('#resultsdiv').html(html);// alert(JSON.stringify(data));
+                    }
+                }
+            };
+            request.send();
+            /*$.ajax({
+                type     : "GET",
+                cache    : false,
+                url      : $(this).attr('action'),
+                data     : $(this).serialize(),
+                crossDomain: true,
+                success  : function(data) {
+                    var jsonData = JSON.parse(JSON.stringify(data))["properties"];
+                    var html="";
+                    for(ind in jsonData)
+                    {
+                    html += "<div class='card p-3 m-2'>"+
+                            "<div class='row card-block'>"+
+                            "<div class='propertySummary col-sm-8 col-md-8'><h3 class='card-title'>"+jsonData[ind].title+"</h3></a></div></div>" +
+                            "<h5 class='card-title'>"+jsonData[ind].price + " " + jsonData[ind].size+ " m² " + jsonData[ind].numberofrooms+ " rooms "+" </h5>" +
+                            "<div class='card-text'>"+ jsonData[ind].plz + "," + jsonData[ind].city + "," + jsonData[ind].state + "," + jsonData[ind].country +"</div>" +
+                            "<div class='propertyImage col-sm-4 col-md-4'>"+jsonData[ind].image1+"</div></div>";
+
+
+                    /!*"<a href="/property/?id=<%=properties[i].id%>"><%=properties[i].title%></h3></a>
+                    <h5><b>€<%= properties[i].price%></b>&nbsp;&nbsp;&nbsp;<%= properties[i].size%>m<sup>2</sup>&nbsp;&nbsp;&nbsp;<%= properties[i].numberofrooms%>&nbsp;Rooms</h5>
+                    <% if(locals.userProfile) { %>s
+                    <div class="card-text"><%=properties[i].housenumber%>,<%=properties[i].street%>,<%=properties[i].plz%>,<%=properties[i].city%><br><%=properties[i].state%>,<%=properties[i].country%></div>
+                            <% } else{%>
+                    <div class="card-text"><%=properties[i].plz%>,<%=properties[i].city%>,<%=properties[i].state%>,<%=properties[i].country%></div>
+                            <% }%>
+                    <div class="card-text">Year Built: <%=properties[i].yearbuilt%><br>Published In: <%=properties[i].posted%></div>
+                        </div>
+                        <div class="propertyImage col-sm-4 col-md-4">
+                        <% if(properties[i].image1){%>
+                    <img src="<%=properties[i].image1%>" class="img-fluid" alt="Property Image">
+                            <%}else{%>
+                    <img src="/img/assets/defaultProperty.jpg" class="img-fluid" alt="Property Image">
+                            <%}%>
+                    </div>
+                    </div>
+                    </div>*!/
+                        //html += "<div>" +property["title"]+ "</div>";
+                    }
+                    //$('#searchdiv').hide();
+                    $('#resultsdiv').html(html);// alert(JSON.stringify(data));
+                }
+            });*/
+        });
+
+        /*function submitForm(form){
+            var url = form.getAttribute("action");
+            var formData = $(form).serializeArray();
+            $.get(url, formData).done(function (data) {
+                alert(data);
+            });
+        }*/
+    </script>
+
+
+    </body>
+
+</html>

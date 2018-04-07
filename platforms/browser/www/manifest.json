@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "BiiGCordova",
+  "short_name": "BiiGCordova",
+  "version": "io.cordova.hellocordova",
+  "description": "Real Estate Application",
+  "author": "Apache Cordova Team",
+  "icons": [],
+  "start_url": "propertyfinder.html"
+}

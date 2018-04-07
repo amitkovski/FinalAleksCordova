@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BiiG</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <!--<link rel="import" href="_linkToStylesheets.html"> -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/jquery-ui.css"/>
+        <script type="text/javascript" src="cordova.js"></script>
+    <script>
+
+    </script>
+
+    </head>
+    <body onload ="onBodyLoad()">
+
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg  light-green lighten-5 fixed-top" style="padding: 0px">
+            <a class="navbar-brand" href="/">
+                <img src="img/assets/biiglogo.png" height="75" alt="">
+            </a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Links -->
+               <!-- <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="btn btn-info" href="aboutUs.html">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-info" href="contactUs.html">CONTACT US</a>
+                    </li>
+                </ul> -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a id="signinbutton" class="btn btn-outline-primary waves-effect">SIGN IN</a>
+                        <a class="nav-link" id="device"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary waves-effect" id="uploadProp">UPLOAD</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary waves-effect" id="signoutbutton">SIGN OUT</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+
+        <a id="back-to-top" href="#" class="btn btn-default btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">TOP</a>
+        <br/><br/><br/><br/>
+        <div class="container" id="modalsignin">
+                        <h5 class="modal-title" id="modalsign">Sign In to BiiG</h5>
+                        <form class="form" id="signInForm" method="post" action="https://evening-waters-97508.herokuapp.com/user/login">
+                            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" title="Email Address" required autofocus>
+                            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" title="Password" required>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" value="SIGN IN">
+                            </div>
+                        </form>
+                        <br/>
+                <!--
+                        <form class="form text-center" name="signInForm" method="get" action="/loadforgotpassword">
+                            <input type="submit" class="btn btn-info btn-sm" value="FORGOT PASSWORD">
+                        </form> -->
+        </div>
+        <div class="container" id="newPropertyDiv">
+            <div class="jumbotron">
+                <form name="propertyNew" method="post" enctype="multipart/form-data" action="https://evening-waters-97508.herokuapp.com/property" id="propertyNew">
+                    <input id="myid" name="employeeId" type="hidden" value=""/>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Title</b>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Title" title="Title" name="title" type="text" class="form-control" required autofocus/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Price</b>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Price" title="Price" name="price" type="number" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Overview</b>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea placeholder="Overview" title="Overview" name="overview" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Description</b>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea placeholder="Description" title="Description" name="desc" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Size</b>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" name="size" class="form-control" placeholder="Size" title="Size (in metre-squared)" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Number of Rooms</b>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" name="numberofrooms" class="form-control" placeholder="Number of rooms" title="Number Of Rooms" required/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Furnishing state</b>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-control" name="furnishingstate" required>
+                                <option value="" disabled selected>Choose One</option>
+                                <option value="161">Unfurnished</option>
+                                <option value="171">Semi Furnished</option>
+                                <option value="181">Fully Furnished</option>
+                                <!-- <% if (locals.furS) { %>
+                                  <% for(var i=0; i < furS.length; i++) { %>
+                                    <option value="<%= furS[i].id %>"><%= furS[i].value %></option>
+                                    <% } %>
+                                    <% } %> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Address</b>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input id="streetname1" type="text" name="streetname" title="Street Name" placeholder="Street Name" class="form-control" required/>
+                                </div>
+                                <div class="col-md-4">
+                                    <input id="housenumber1" type="text" name="housenumber" title="House Number" placeholder="House Number" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select id="country1" name="country" class="form-control" ></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="state" id="state1" class="form-control"><option value="0" disabled selected>Select State</option></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input id="plz1" type="number" name="plz" title="PLZ" placeholder="PLZ" class="form-control" required/>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="city1" type="text" name="city" title="City" placeholder="City" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Images</b>
+                        </div>
+                        <div class="col-md-9" style="display:inherit">
+                            <div class="property-pic col-md-4" id="divProperty1"  style="background-image:url('/img/property/defaultProperty.jpeg')" >
+                                <div class="myUpload pt-5" style="display:none">
+                                    <input type="file" id="imgProperty1" name="imgProperty1" hidden>
+                                    <label for="imgProperty1">Browse</label>
+                                </div>
+                            </div>
+                            <div class="property-pic col-md-4" id="divProperty2" style="background-image:url('/img/property/defaultProperty.jpeg')" >
+                                <div class="myUpload pt-5" style="display:none">
+                                    <input type="file" id="imgProperty2" name="imgProperty2" hidden>
+                                    <label for="imgProperty2">Browse</label>
+                                </div>
+                            </div>
+                            <div class="property-pic col-md-4" id="divProperty3" style="background-image:url('/img/property/defaultProperty.jpeg')" >
+                                <div class="myUpload pt-5" style="display:none">
+                                    <input type="file" id="imgProperty3" name="imgProperty3" hidden>
+                                    <label for="imgProperty3">Browse</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" id="submitbutton" class="btn btn-primary btn-block" value="Save">
+                </form>
+            </div>
+            <input type="button" onclick="$('#newPropertyDiv').hide();" id="backbutton" class="btn btn-primary btn-sm" value="BACK">
+        </div>
+    <div class="divPropertyFinder">
+        <br><br>
+        <div class="container-fluid justify-content-center align-items-center ">
+            <form id="searchform" method="GET" action="https://evening-waters-97508.herokuapp.com/property/search">
+                <div class="row p-2 align-items-center justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="input-group add-on">
+                            <input class="form-control" aria-label="Text input with dropdown button" placeholder="Enter Address or City or Postalcode" id="key" type="text" name="key">
+                            <div class="input-group-btn">
+                                <button id="dosearch" type="button" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3 justify-content-end">
+                    <div class="col-sm-3 col-md-2" id="divTotal">
+
+                    </div>
+                    <!--<div class="col-sm-3 col-md-4 pl-5">
+                        <div class="dropdown show">
+                            &lt;!&ndash;                <div class="dropdown-menu" aria-labelledby="dropdownSortMenu">&ndash;&gt;
+                            <select name="sort" onchange="document.getElementById('frmPropertySearch').submit()" class="btn btn-default dropdown-toggle">
+                                <option value="" disabled selected>Sort By</option>
+                                <% if (locals.sortOptions) {
+                                for (var i = 0; i < sortOptions.length; i++) {
+                                if (sortOptions[i].value == sort) {
+                                %>
+                                <option value="<%=  sortOptions[i].value %>" selected="selected"><%= sortOptions[i].value %></option>
+                                <% continue; } %>
+
+                                <option value="<%=  sortOptions[i].value %>"><%= sortOptions[i].value %></option>
+
+                                <% }
+                                } %>
+                            </select>
+                            &lt;!&ndash;                </div>&ndash;&gt;
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3 justify-content-center">-->
+                    <!--<div class="col-sm-3 col-md-2">
+                        <div id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <h6 class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Location
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapseOne" class="collapse <%= 0 < location.length ? 'show' : ''%>" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="card-block">
+                                        <div class="checkboxPlaces m-3">
+                                            <% if(locals.locations){
+                                            for(var i = 0;i < locations.length;i++) { %>
+                                            <div class="checkbox">
+                                                <%
+                                                if ((typeof location === 'string' && location == locations[i].city) || (typeof location === 'object' && location.join(',').includes(locations[i].city))) { %>
+                                                <input type="checkbox" name="location" value="<%=locations[i].city%>" checked="checked"><%=locations[i].city%>
+                                            </div>
+                                            <% continue;                                               } %>
+
+                                            <input type="checkbox" name="location" value="<%=locations[i].city%>"><%=locations[i].city%>
+                                        </div>
+                                        <% }
+                                        }else{ %>
+                                        <div>
+                                            No places
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingSize">
+                                <h6 class="mb-0">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSize" aria-expanded="false" aria-controls="collapseSize">
+                                        Size
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div id="collapseSize" class="collapse <%= 0 < size.length ? 'show' : ''%>" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-block">
+                                    <div class="checkboxSize m-3">
+                                        <% if(locals.sizes){
+                                        for(var i = 0;i < sizes.length;i++) { %>
+                                        <div class="checkbox">
+                                            <%
+                                            if ((typeof size === 'string' && size == sizes[i].value) || (typeof size === 'object' && size.join(',').includes(sizes[i].value))) { %>
+                                            <input type="checkbox" class="propSize" name="size" value="<%=sizes[i].value%>" checked="checked"><%=sizes[i].value%>
+                                        </div>
+                                        <% continue;                                               } %>
+
+
+                                        <input type="checkbox" class="propSize" name="size" value="<%=sizes[i].value%>"><%=sizes[i].value%>
+                                    </div>
+                                    <% }
+                                    }else{ %>
+                                    <div>
+                                        No size
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!--<div class="card">
+                        <div class="card-header" role="tab" id="headingThree">
+                            <h6 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Furnishing State
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseThree" class="collapse <%= 0 < furnishingState.length ? 'show' : ''%>" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="card-block">
+                                <div class="checkboxFurnished m-3">
+                                    <% if(locals.furnishingStates){
+                                    for(var i = 0;i < furnishingStates.length;i++) { %>
+                                    <div class="checkbox">
+                                        <%
+                                        if ((typeof furnishingState === 'string' && furnishingState == furnishingStates[i].id) || (typeof furnishingState === 'object' && furnishingState.join(',').includes(furnishingStates[i].id))) { %>
+                                        <input type="checkbox" name="furnishingState" value="<%=furnishingStates[i].id%>" checked="checked"><%=furnishingStates[i].value%>
+                                    </div>
+                                    <% continue;                                               } %>
+
+                                    <input type="checkbox" name="furnishingState" value="<%=furnishingStates[i].id%>"><%=furnishingStates[i].value%>
+                                </div>
+                                <% }
+                                }else{ %>
+                                <div>
+                                    No furnishingState
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <!--<div class="card">
+                    <div class="card-header" role="tab" id="headingNo">
+                        <h6 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNo" aria-expanded="false" aria-controls="collapseOne">
+                                Number of Rooms
+                            </a>
+                        </h6>
+                    </div>
+
+                    <div id="collapseNo" class="collapse <%= 0 < numberOfRooms.length ? 'show' : ''%>" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="card-block">
+                            <div class="checkboxNo m-3">
+                                <div class="checkbox">
+                                    <%
+                                    if ((typeof numberOfRooms === 'string' && numberOfRooms == '1') || (typeof numberOfRooms === 'object' && numberOfRooms.join(',').includes('1'))) { %>
+                                    <input type="checkbox" name="numberOfRooms" value="1" checked="checked"> 1 <% } else { %>
+                                    <input type="checkbox" name="numberOfRooms" value="1"> 1
+                                    <% } %>
+                                </div>
+                                <div class="checkbox">
+                                    <%
+                                    if ((typeof numberOfRooms === 'string' && numberOfRooms == '2') || (typeof numberOfRooms === 'object' && numberOfRooms.join(',').includes('2'))) { %>
+                                    <input type="checkbox" name="numberOfRooms" value="2" checked="checked"> 2
+                                    <% } else { %>
+                                    <input type="checkbox" name="numberOfRooms" value="2"> 2
+                                    <% } %>
+                                </div>
+                                <div class="checkbox">
+                                    <%
+                                    if ((typeof numberOfRooms === 'string' && numberOfRooms == '3') || (typeof numberOfRooms === 'object' && numberOfRooms.join(',').includes('3'))) { %>
+                                    <input type="checkbox" name="numberOfRooms" value="3" checked="checked"> 3
+                                    <% } else { %>
+                                    <input type="checkbox" name="numberOfRooms" value="3"> 3
+                                    <% } %>
+                                </div>
+                                <div
+                                        class="checkbox">
+                                    <%
+
+                                    if ((typeof numberOfRooms === 'string' && numberOfRooms == ">= 4") || (typeof numberOfRooms === 'object' && numberOfRooms.join(',').includes(">= 4"))) { %>
+                                    <input type="checkbox" name="numberOfRooms" value=">= 4" checked="checked"> >= 4
+                                    <% } else { %>
+
+                                    <input type="checkbox" name="numberOfRooms" value=">= 4"> >= 4
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </form>
+        </div>
+    </div>
+
+    <div class="col-sm-8 col-md-6">
+        <div class="divProperties">
+            <!--<% if(locals.properties){
+            for(var i = 0;i < properties.length;i++) { %>
+            <div class="card p-3 m-2">
+                <div class="row card-block">
+                    <div class="propertySummary col-sm-8 col-md-8">
+                        <% if(locals.userProfile){%>
+                        <% if(userProfile.customer){ %>
+                        <% if (1 == properties[i].customer_favorite) { %>
+                        <a class="favButton" onclick="removeFromFavorite(<%=properties[i].id%>,this)" style="float: left;">
+                            <i class="heart fa fa-heart"></i>&nbsp;&nbsp;
+                        </a>
+                        <% } else{ %>
+                        <a class="favButton" onclick="addToFavorite(<%=properties[i].id%>,this)" style="float: left;">
+                            <i class="heart fa fa-heart-o"></i>&nbsp;&nbsp;
+                        </a>
+                        <% } %>
+                        <%}%>
+                        <%}%>
+                        <a href="/property/?id=<%=properties[i].id%>"><h3 class="card-title"><%=properties[i].title%></h3></a>
+                        <h5><b>€<%= properties[i].price%></b>&nbsp;&nbsp;&nbsp;<%= properties[i].size%>m<sup>2</sup>&nbsp;&nbsp;&nbsp;<%= properties[i].numberofrooms%>&nbsp;Rooms</h5>
+                        <% if(locals.userProfile) { %>
+                        <div class="card-text"><%=properties[i].housenumber%>,<%=properties[i].street%>,<%=properties[i].plz%>,<%=properties[i].city%><br><%=properties[i].state%>,<%=properties[i].country%></div>
+                        <% } else{%>
+                        <div class="card-text"><%=properties[i].plz%>,<%=properties[i].city%>,<%=properties[i].state%>,<%=properties[i].country%></div>
+                        <% }%>
+                        <div class="card-text">Year Built: <%=properties[i].yearbuilt%><br>Published In: <%=properties[i].posted%></div>
+                    </div>
+                    <div class="propertyImage col-sm-4 col-md-4">
+                        <% if(properties[i].image1){%>
+                        <img src="<%=properties[i].image1%>" class="img-fluid" alt="Property Image">
+                        <%}else{%>
+                        <img src="/img/assets/defaultProperty.jpg" class="img-fluid" alt="Property Image">
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+            <% }
+            }else{ %>
+            <div class="card p-3 m-2">
+                No Property
+            </div>
+            <% } %>-->
+        </div>
+    </div>
+
+   <!--<link rel="import" href="_linkToScripts.html">-->
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script type="text/javascript" src="js/topLink.js"></script>
+        <script type="text/javascript" src="js/countries.js"></script>
+        <script src="js/cordovaPlugins.js"></script>
+
+        <script>
+       /* $(function(){
+            $("#header").load("_header.html");
+        });*/
+
+       /*function showedit(country,state){
+           $("#viewForm").hide();
+           $("#editForm").show();
+           if(country!="undefined")
+               $("#country").val(country);
+           populateStates('country', 'state');
+           if(state!="undefined")
+               $("#state").val(state);
+       }*/
+
+      // populateCountries("country", "state");
+       populateCountries("country1", "state1");
+
+
+       $(document).ready(function()
+       {
+           $('#modalsignin').hide();
+           $('#newPropertyDiv').hide();
+           $('#uploadProp').hide();
+           $('#signoutbutton').hide();
+       });
+
+       $('#signoutbutton').click(function()
+       {
+           $('#modalsignin').hide();
+           $('#newPropertyDiv').hide();
+           $('#uploadProp').hide();
+           $('#signoutbutton').hide();
+           $('#signinbutton').show();
+           $('#myid').val('');
+       });
+
+       $('#signinbutton').click(function()
+       {
+           $('#modalsignin').toggle(1000);
+       });
+
+       $('#uploadProp').click(function () {
+          $('#newPropertyDiv').toggle(1000);
+       });
+
+        $('#dosearch').click(function() {
+            var request = new XMLHttpRequest();
+            //alert($('#searchform').attr('action') + "?key=" + $('#key').val());
+            request.open("GET", $('#searchform').attr('action') + "?key=" + $('#key').val(), true);
+            request.onreadystatechange = function () {
+                //alert("Yaay");
+                if (request.readyState == 4) {
+                    if (request.status == 200 || request.status == 0) {
+                        var jsonData = JSON.parse(request.response);
+                        var html = "";
+                        $("#divTotal").html("<br><br>"+jsonData.length+" properties found <br><br>");
+                        for (ind in jsonData) {
+                            html += "<div class='card p-3 m-2'>" +
+                                "<div class='row card-block'>" +
+                                "<div class='propertySummary col-sm-8 col-md-8'><h3 class='card-title'>" + jsonData[ind].title + "</h3></a>" +
+                                "<h5><b>€" + jsonData[ind].price + "</b>&nbsp;&nbsp;&nbsp;" + jsonData[ind].size + " m² " + jsonData[ind].numberofrooms + " rooms " + " </h5>" +
+                                "<div class='card-text'>" + jsonData[ind].plz + "," + jsonData[ind].city + "," + jsonData[ind].state + "," + jsonData[ind].country + "</div>" +
+                                "<div class='card-text'>Year Built: "+ jsonData[ind].yearbuilt +" <br>Published In: "+ jsonData[ind].posted + "</div></div>" +
+                                "<div class='propertyImage col-sm-4 col-md-4'><img src='https://evening-waters-97508.herokuapp.com/" + jsonData[ind].image1 + "' class='img-fluid' alt='Property Image'></div></div></div>";
+
+                        }
+                        $('.divProperties').html(html);// alert(JSON.stringify(data));
+                    }
+                }
+            };
+            request.send();
+        });
+
+        $('#signInForm').submit(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $('#signInForm').attr('action'),
+                data: $( this ).serialize(),
+                success: function(response){
+                    if(response)
+                    {
+                        //alert(response["id"]);
+                        $('#modalsignin').hide();
+                        if(response["employee"] != null) {
+                            $('#uploadProp').show();
+                            $('#myid').val(response["employee"]);
+                        }
+                        $('#signinbutton').hide();
+                        $('#signoutbutton').show();
+                    }
+                    else
+                    {
+                        alert("Failed to log in.");
+                        $('#signinbutton').show();
+                        $('#uploadProp').hide();
+                        $('#newPropertyDiv').hide();
+                        $('#signoutbutton').hide();
+                    }
+                }
+            });
+            /*var request = new XMLHttpRequest();
+            //alert($('#searchform').attr('action') + "?key=" + $('#key').val());
+            request.open("POST", $('#signInForm').attr('action'), true);
+            request.body = ;
+            request.onreadystatechange = function () {
+                //alert("Yaay");
+                if (request.readyState == 4) {
+                    if (request.status == 200 || request.status == 0) {
+
+                    }
+                }
+            };
+            request.send();*/
+        });
+
+        $('#propertyNew').submit(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $('#propertyNew').attr('action'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response) {
+                        //alert("Property successfully added");
+                        $('#propertyNew')[0].reset();
+                        $('#newPropertyDiv').hide();
+                    }
+                    else
+                    {
+                        alert("Error adding property");
+                    }
+                }
+            });
+        });
+    </script>
+
+    </body>
+</html>

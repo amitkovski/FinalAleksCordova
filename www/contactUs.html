@@ -1,0 +1,173 @@
+
+<!--
+File Name: contactus.ejs
+
+Description:
+This is a Contact Us page of the Biig application.
+
+Authors:
+Mahdis,Akhila-->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BiiG</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <!--<link rel="import" href="_linkToStylesheets.html"> -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="/css/mdb.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/jquery-ui.css"/>
+
+    </head>
+    <body id="intro">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg  light-green lighten-5 fixed-top" style="padding: 0px">
+            <a class="navbar-brand" href="/">
+                <img src="/img/assets/biiglogo.png" height="75" alt="">
+            </a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <!-- Dropdown -->
+                    <li class="nav-item">
+                        <a class="btn btn-info" href="/aboutus">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-info" href="/contactus">CONTACT US</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary waves-effect" onclick="$('#modalsignin').toggle(1000)">SIGN IN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary waves-effect" onclick="$('#signupmodal').toggle(1000)">SIGN UP</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+
+        <a id="back-to-top" href="#" class="btn btn-default btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">TOP</a>
+
+        <div class="modal fade" id="#modalsignin" tabindex="-1" role="form" aria-labelledby="signin" aria-hidden="true" >
+            <div class="modal-dialog" role="form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalsign">Sign In to BiiG</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" name="signInForm" method="post">
+                            <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" title="Email Address" required autofocus>
+                            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" title="Password" required>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" value="SIGN IN">
+                            </div>
+                        </form>
+                        <br/>
+                        <form class="form text-center" name="signInForm" method="get" action="/loadforgotpassword">
+                            <input type="submit" class="btn btn-info btn-sm" value="FORGOT PASSWORD">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/><br/>
+
+        <div class="row container-fluid  align-items-center justify-content-center p-4" >
+            <div class="col-lg-8 p-5 text-align-center align-items-center" style="background: rgba(255,255,220,0.8)">
+                <p class="h2-responsive">Get In Touch</p>
+                <p class="h6-responsive">please fill out the quick form and we will get in touch with you in lightening speed.</p>
+
+
+                <form class="width: 50%" id="myForm" method="post" action="/fa17g22/contactus">
+                    <!--First row-->
+                    <div class="row ">
+                        <!--First column-->
+                        <div class="col-md-4">
+                            <div class="md-form">
+                                <i class="fa fa-user prefix"></i>
+                                <input type="text" id="form81" name="name" class="form-control validate" required>
+                                <label for="form81" data-error="wrong" data-success="right">Type your name</label>
+                            </div>
+                        </div>
+
+                        <!--Second column-->
+                        <div class="col-md-4">
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix"></i>
+                                <input type="email" id="form82" name="email" class="form-control validate" required>
+                                <label for="form82" data-error="wrong" data-success="right">Type your email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.First row-->
+
+                    <!--Second row-->
+                    <div class="row">
+                        <!--First column-->
+                        <div class="col-md-8">
+
+                            <div class="md-form">
+                                <textarea type="text" name="message" id="form76" class="md-textarea" required></textarea>
+                                <label for="form76">Message</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/.Second row-->
+
+                    <div class="md-form form-group">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Send">
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="col-lg-2 m-3 text-align-center">
+
+
+                <!--Panel-->
+                <div class="card">
+                    <h3 class="card-header primary-color white-text">Contact Us</h3>
+                    <div class="card-body">
+                        <h4 class="card-title">BiiG</h4>
+                        <p class="card-text">Hochschule Fulda,Lioba Str.2,Fulda-36037</p>
+                        <p class="card-text">Biig@gmail.com</p>
+                    </div>
+                </div>
+                <!--/.Panel-->
+
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+
+        <link rel="import" href="_linkToScripts.html">
+
+
+    </body>
+
+</html>
